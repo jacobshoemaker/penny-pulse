@@ -5,5 +5,4 @@ urlpatterns = [
     path('signup/', SignUp.as_view(), name='signup'),
     path('login/', LogIn.as_view(), name='login'),
     path('logout/', LogOut.as_view(), name='logout'),
-    # path('delete/', DeleteAccount.as_view(), name='delete'),
 ]
