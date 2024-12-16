@@ -58,7 +58,8 @@ class AllTransactions(TokenReq):
         
         except Transaction.DoesNotExist:
             return Response({"error": "Transaction not found or unauthorized"}, status=HTTP_404_NOT_FOUND)
-        
+    
+    # Deleting a single transaction for a specific user
     def delete(self, request, pk=None):
         
         try:
