@@ -67,9 +67,9 @@ class AllTransactions(TokenReq):
             single_transaction = Transaction.objects.get(id=pk, user=user)
             single_transaction.delete()
             
-            return Response({"message": "Transaction deleted successfully"}, status=HTTP_204_NO_CONTENT)
+            return Response({"message": "Transaction deleted successfully."}, status=HTTP_204_NO_CONTENT)
        
         except Transaction.DoesNotExist:
-            return Response({"error": "Transaction not found or unauthorized"}, status=HTTP_404_NOT_FOUND) 
+            return Response({"error": "Transaction not found or unauthorized."}, status=HTTP_404_NOT_FOUND) 
         
         

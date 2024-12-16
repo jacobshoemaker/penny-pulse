@@ -57,6 +57,18 @@ class AllBudgetGoals(TokenReq):
             
         except BudgetGoal.DoesNotExist:
             return Response({"error": "Budget goal not found or unauthorized"}, status=HTTP_404_NOT_FOUND)
+    
+    def delete(self, request, pk=None):
+        
+        try:
+            user = request.user
+            single_goal = BudgetGoal.objects.get(id=pk, user=user)
+            single_goal.delete()
+            
+            return Response({"message": "Budget goal deleted successfully."}, status=HTTP_204_NO_CONTENT)
+        
+        except BudgetGoal.DoesNotExist:
+            return Response({"error": "Budget goal not found or unauthorized."}, status=HTTP_404_NOT_FOUND)
         
     
     
