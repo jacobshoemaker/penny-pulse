@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.core.exceptions import ValidationError
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login, logout
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -35,6 +35,7 @@ class LogIn(APIView):
         password = body_data.get('password')
         user = authenticate(username=email, password=password)
         if user:
+           login(request, user)
            token, created = Token.objects.get_or_create(user=user)
            return Response({'token' : token.key, 'user' : user.email})
         else:
@@ -44,4 +45,5 @@ class LogOut(TokenReq):
     
     def post(self, request):
         request.user.auth_token.delete()
+        logout(request)
         return Response(status=HTTP_204_NO_CONTENT)

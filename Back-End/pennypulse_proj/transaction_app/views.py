@@ -42,6 +42,7 @@ class AllTransactions(TokenReq):
     
     # Updating a single transaction for a specific user
     def put(self, request, pk=None):
+        
         try:
             user = request.user
             single_transaction = Transaction.objects.get(id=pk, user=user)
@@ -57,3 +58,11 @@ class AllTransactions(TokenReq):
         
         except Transaction.DoesNotExist:
             return Response({"error": "Transaction not found or unauthorized"}, status=HTTP_404_NOT_FOUND)
+        
+    # def delete(self, request, pk=None):
+        
+    #     try:
+    #         user = request.user
+    #         single_trans_del = Transaction.objects.delete
+        
+        
