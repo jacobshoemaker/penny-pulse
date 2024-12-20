@@ -33,12 +33,13 @@ class AllBudgetGoals(TokenReq):
         body_data = request.data.copy()
         body_data['user'] = request.user.id
         
-        new_budget_goal = BudgetGoalSerializer(data=body_data, partial=True)
-        
-        if new_budget_goal.is_valid():
-            new_budget_goal.save()
-            return Response(new_budget_goal.data, status=HTTP_201_CREATED)
-        return Response(new_budget_goal.errors, status=HTTP_400_BAD_REQUEST)
+        try:
+            new_budget_goal = BudgetGoalSerializer(data=body_data, partial=True) 
+            if new_budget_goal.is_valid():
+                new_budget_goal.save()
+                return Response(new_budget_goal.data, status=HTTP_201_CREATED)
+        except Exception:
+            return Response(new_budget_goal.errors, status=HTTP_400_BAD_REQUEST)
     
     def put(self, request, pk=None):
         

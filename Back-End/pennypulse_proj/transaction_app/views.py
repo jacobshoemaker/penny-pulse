@@ -33,12 +33,13 @@ class AllTransactions(TokenReq):
         body_data = request.data.copy()
         body_data['user'] = request.user.id
         
-        new_transaction = TransactionSerializer(data=body_data, partial=True)
-        
-        if new_transaction.is_valid():
-            new_transaction.save()
-            return Response(new_transaction.data, status=HTTP_201_CREATED)
-        return Response(new_transaction.errors, status=HTTP_400_BAD_REQUEST)
+        try:
+            new_transaction = TransactionSerializer(data=body_data, partial=True)
+            if new_transaction.is_valid():
+                new_transaction.save()
+                return Response(new_transaction.data, status=HTTP_201_CREATED)
+        except Exception:
+            return Response(new_transaction.errors, status=HTTP_400_BAD_REQUEST)
     
     # Updating a single transaction for a specific user
     def put(self, request, pk=None):
