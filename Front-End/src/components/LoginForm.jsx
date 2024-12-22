@@ -8,12 +8,11 @@ function LoginForm() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
-    const [successMessage, setSuccessMessage] = useState('');
+
 
     const loginUser = async(e) => {
       e.preventDefault();
       setError(null);
-      setSuccessMessage('');
     
       try {
       // Post request to backend
@@ -24,8 +23,7 @@ function LoginForm() {
       
         
       
-      setSuccessMessage('Login successful');
-      console.log(successMessage)
+      console.log('Login successful');
       console.log(response.data);
 
       const { token } = response.data;
