@@ -20,7 +20,7 @@ const NavBar = () => {
                 }
             );
             localStorage.removeItem('token');
-            navigate('/');
+            navigate('/logout');
         } catch (error) {
             console.error('Logout failed', error);
         }
