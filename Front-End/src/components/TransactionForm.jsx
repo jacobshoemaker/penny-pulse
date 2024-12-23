@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Plot from 'react-plotly.js';
 import TransactionPieChart from './TransactionPieChart';
+import Button from 'react-bootstrap/Button';
 
 const TransactionForm = () => {
     const [transactions, setTransactions] = useState([]);
@@ -117,15 +118,19 @@ const TransactionForm = () => {
                     <option value="income">Income</option>
                     <option value="expense">Expense</option>
                 </select>
-                <button type="submit">{isEditing ? 'Update' : 'Add'} Transaction</button>
+                <Button variant="primary" size="sm" type="submit" style={{marginLeft: '5px'}}>{isEditing ? 'Update ' : 'Add '} 
+                     Transaction
+                </Button>
             </form>
             <TransactionPieChart transactions={transactions} />
             <ul>
                 {transactions.map((t) => (
                     <li key={t.id}>
                         {t.title} - ${t.amount} ({t.trans_type})
-                        <button onClick={() => handleEdit(t.id)}>Edit</button>
-                        <button onClick={() => handleDelete(t.id)}>Delete</button>
+                        <Button variant="primary" size="sm" onClick={() => handleEdit(t.id)} style={{ marginRight: '5px', marginBottom: '5px'} }>
+                            Edit
+                        </Button>
+                        <Button variant="primary" size="sm" onClick={() => handleDelete(t.id)}>Delete</Button>
                     </li>
                 ))}
             </ul>

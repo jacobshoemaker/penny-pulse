@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom'
+import Button from 'react-bootstrap/Button';
+import logo from '../../public/pennypulse-high-resolution-logo.png';
 
 const NavBar = () => {
     const navigate = useNavigate();
@@ -26,7 +28,10 @@ const NavBar = () => {
         }
     };
     return (
-        <ul style={{ display:"flex", justifyContent: "space-around" }}>
+        <ul style={{ display: "flex", justifyContent: "space-around", alignItems: "center", listStyle: "none", padding: 0, margin: 0, position: "relative" }}>
+            <li style={{ position: "absolute", top: 0, left: 0 }}>
+                <img src={logo} alt="Penny Pulse Logo" style={{ height: "60px", margin: "0px" }} />
+            </li>
             <li>
                 <Link to='/'>Home</Link>
             </li>
@@ -43,7 +48,7 @@ const NavBar = () => {
                 <Link to='/goals/'>Goals</Link>
             </li>
             <li>
-                <button onClick={logoutUser}>Logout</button>
+                <Button variant="danger" size="sm" onClick={logoutUser}>Logout</Button>
             </li>
         </ul>
     );
