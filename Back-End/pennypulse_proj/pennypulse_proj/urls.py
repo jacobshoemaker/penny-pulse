@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.http import JsonResponse
+from news_app.views import fetch_rss_feed
 
 def test_connection(request):
     return JsonResponse({"Connected": True})
@@ -26,5 +27,6 @@ urlpatterns = [
     path('', test_connection),
     path('api/v1/users/', include('user_app.urls')),
     path('api/v1/transactions/', include('transaction_app.urls')),
-    path('api/v1/goals/', include('goal_app.urls'))
+    path('api/v1/goals/', include('goal_app.urls')),
+    path('api/v1/news/', include('news_app.urls')),
 ]

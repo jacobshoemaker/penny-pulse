@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'user_app',
     'transaction_app',
     'goal_app',
+    'news_app',
     'corsheaders',
 ]
 
