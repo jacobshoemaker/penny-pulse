@@ -40,6 +40,9 @@ const NavBar = () => {
                 <Link to='/transactions/'>Transactions</Link>
             </li>
             <li>
+                <Link to='/goals/'>Goals</Link>
+            </li>
+            <li>
                 <button onClick={logoutUser}>Logout</button>
             </li>
         </ul>

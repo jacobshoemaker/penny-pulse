@@ -3,6 +3,7 @@ import RegistrationPage from './pages/RegistrationPage';
 import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
 import TransactionPage from './pages/TransactionPage';
+import GoalsPage from './pages/GoalsPage';
 import LogoutPage from './pages/LogoutPage.jsx';
 import App from './App.jsx';
 
@@ -25,6 +26,10 @@ const router = createBrowserRouter([{
         {
             path:"/transactions/",
             element:<TransactionPage/>,
+        },
+        {
+            path:"/goals/",
+            element:<GoalsPage/>,
         },
         {
             path:"/logout/",

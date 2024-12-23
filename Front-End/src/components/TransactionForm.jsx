@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Plot from 'react-plotly.js';
+import TransactionPieChart from './TransactionPieChart';
 
 const TransactionForm = () => {
     const [transactions, setTransactions] = useState([]);
@@ -14,8 +16,12 @@ const TransactionForm = () => {
                 'Authorization': `Token ${localStorage.getItem('token')}`
             }
         })
-            .then(response => setTransactions(response.data))
-            .catch(error => console.error('Error fetching transactions:', error));
+            .then(response => { 
+                setTransactions(response.data.map(t => ({ ...t, amount: Number(t.amount) })));
+            })
+            .catch(error => {
+                console.error('Error fetching transactions:', error);
+            });
     }, []);
 
 
@@ -35,7 +41,7 @@ const TransactionForm = () => {
         axios({
             method: method,
             url: url,
-            data: transaction,
+            data: { ...transaction, amount: Number(transaction.amount) },
             headers: { 
                 'Content-Type': 'application/json',
                 'Authorization': `Token ${localStorage.getItem('token')}`
@@ -43,13 +49,15 @@ const TransactionForm = () => {
         })
             .then(response => {
                 if (isEditing) {
-                    setTransactions(transactions.map(t => (t.id === editId ? response.data : t)));
+                    setTransactions(transactions.map(t => t.id === editId ? { ...response.data, amount: Number(response.data.amount) } : t));
                     setIsEditing(false);
                     setEditId(null);
                 } else {
-                    setTransactions([...transactions, response.data]);
+                    setTransactions([...transactions, { ...response.data, amount: Number(response.data.amount) }]);
                 }
                 setTransaction({ title: '', amount: '', trans_type: 'income' });
+                setIsEditing(false);
+                setEditId(null);
             })
             .catch(error => console.error('Error creating/updating transaction:', error));
         };
@@ -111,6 +119,7 @@ const TransactionForm = () => {
                 </select>
                 <button type="submit">{isEditing ? 'Update' : 'Add'} Transaction</button>
             </form>
+            <TransactionPieChart transactions={transactions} />
             <ul>
                 {transactions.map((t) => (
                     <li key={t.id}>
