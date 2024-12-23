@@ -48,6 +48,9 @@ const NavBar = () => {
                 <Link to='/goals/'>Goals</Link>
             </li>
             <li>
+                <Link to='/news/'>News</Link>
+            </li>
+            <li>
                 <Button variant="danger" size="sm" onClick={logoutUser}>Logout</Button>
             </li>
         </ul>

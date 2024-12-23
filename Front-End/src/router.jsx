@@ -4,6 +4,7 @@ import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
 import TransactionPage from './pages/TransactionPage';
 import GoalsPage from './pages/GoalsPage';
+import NewsPage from './pages/NewsPage';
 import LogoutPage from './pages/LogoutPage.jsx';
 import App from './App.jsx';
 
@@ -30,6 +31,10 @@ const router = createBrowserRouter([{
         {
             path:"/goals/",
             element:<GoalsPage/>,
+        },
+        {
+            path:"/news/",
+            element:<NewsPage/>,
         },
         {
             path:"/logout/",
