@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import RegistrationPage from './pages/RegistrationPage';
 import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
@@ -42,5 +42,6 @@ const router = createBrowserRouter([{
         }
     ],
 }]);
+
 
 export default router;

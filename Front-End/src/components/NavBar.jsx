@@ -1,5 +1,7 @@
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom';
+import { Navbar, Nav, Container } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import logo from '../../public/pennypulse-high-resolution-logo.png';
 
@@ -28,32 +30,25 @@ const NavBar = () => {
         }
     };
     return (
-        <ul style={{ display: "flex", justifyContent: "space-around", alignItems: "center", listStyle: "none", padding: 0, margin: 0, position: "relative" }}>
-            <li style={{ position: "absolute", top: 0, left: 0 }}>
-                <img src={logo} alt="Penny Pulse Logo" style={{ height: "60px", margin: "0px" }} />
-            </li>
-            <li>
-                <Link to='/'>Home</Link>
-            </li>
-            <li>
-                <Link to='/register/'>Register</Link>
-            </li>
-            <li>
-                <Link to='/login/'>Login</Link>
-            </li>
-            <li>
-                <Link to='/transactions/'>Transactions</Link>
-            </li>
-            <li>
-                <Link to='/goals/'>Goals</Link>
-            </li>
-            <li>
-                <Link to='/news/'>News</Link>
-            </li>
-            <li>
-                <Button variant="danger" size="sm" onClick={logoutUser}>Logout</Button>
-            </li>
-        </ul>
+        <Navbar bg="dark" variant="dark" expand="lg" style={{ backgroundColor: '#003366' }}>
+      <Container>
+        <Navbar.Brand as={Link} to="/">
+          <img src={logo} alt="Penny Pulse Logo" style={{ height: '60px' }} />
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link as={Link} to="/">Home</Nav.Link>
+            <Nav.Link as={Link} to="/register/">Register</Nav.Link>
+            <Nav.Link as={Link} to="/login/">Login</Nav.Link>
+            <Nav.Link as={Link} to="/transactions/">Transactions</Nav.Link>
+            <Nav.Link as={Link} to="/goals/">Goals</Nav.Link>
+            <Nav.Link as={Link} to="/news/">News</Nav.Link>
+            <Nav.Link onClick={logoutUser}>Logout</Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
     );
 };
 

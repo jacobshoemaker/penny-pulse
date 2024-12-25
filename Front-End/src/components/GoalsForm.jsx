@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Button from 'react-bootstrap/Button';
 import ExpenseVsBudgetChart from './ExpenseVsBudgetChart';
 
 const GoalsForm = () => {
@@ -114,7 +115,9 @@ const GoalsForm = () => {
                     placeholder="Saving Limit Goal"
                     required
                 />
-                <button type="submit">{isEditing ? 'Update' : 'Add'} Goal</button>
+                <Button variant="primary" type="submit" size= "sm" style={{ marginLeft: '5px', marginBottom: '5px'} }>
+                    {isEditing ? 'Update' : 'Add'} Goal
+                </Button>
             </form>
             <ExpenseVsBudgetChart transactions={transactions} spendingLimit={Number(spendingLimit)} />
             <ul>
@@ -122,8 +125,12 @@ const GoalsForm = () => {
                     <li key={g.id}>
                         Spending Limit - ${g.spending_limit}<br />
                         Saving Limit - ${g.saving_limit}
-                        <button onClick={() => handleEdit(g.id)}>Edit</button>
-                        <button onClick={() => handleDelete(g.id)}>Delete</button>
+                        <Button variant="primary" size="sm" onClick={() => handleEdit(g.id)} style={{ marginRight: '5px', marginBottom: '5px'} }>
+                            Edit
+                        </Button>
+                        <Button variant="primary" size="sm" onClick={() => handleDelete(g.id)} style={{ marginRight: '5px', marginBottom: '5px'} }>
+                            Delete
+                        </Button>
                     </li>
                 ))}
             </ul>
