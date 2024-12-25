@@ -23,23 +23,27 @@ function RegistrationForm() {
         email,
         password,
       });
-
+  
       setSuccessMessage('Registration successful');
-      console.log(successMessage)
+      window.alert('Registration successful!');
+      console.log(successMessage);
       console.log(response.data);
     } catch (err) {
       console.error(err);
-      setError('An error occurred during registration.')
+      if (err.response && err.response.data && err.response.data.error === 'Email already in use') {
+        window.alert('This email is already in use. Please try another one.');
+      } else {
+        window.alert('An error occurred during registration. Please try again.');
+      }
     }
   };
-
 
   
   return (
     <Form onSubmit={signUpUser}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
-        <Form.Control type="email" placeholder="Enter email" value= {email} onChange={(e) => setEmail(e.target.value)} />
+        <Form.Control type="email" placeholder="Enter email" value= {email} onChange={(e) => setEmail(e.target.value)} className="input-width" />
         <Form.Text className="text-muted">
           We'll never share your email with anyone else.
         </Form.Text>
@@ -47,10 +51,7 @@ function RegistrationForm() {
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Password</Form.Label>
-        <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicCheckbox">
-        <Form.Check type="checkbox" label="Check me out" />
+        <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} className="input-width" />
       </Form.Group>
       <Button variant="primary" type="submit">
         Register
