@@ -5,30 +5,44 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import logo from '../../public/pennypulse-high-resolution-logo.png';
 
+// Navbar component
 const NavBar = () => {
+    // Use the useNavigate hook to navigate to different pages
     const navigate = useNavigate();
 
+    // Function to logout user
     const logoutUser = async () => {
         try {
+            // Get the token from local storage
             const token = localStorage.getItem('token');
+            // If no token is found, throw an error
             if (!token) {
                 throw new Error('No token found');
             }
+            // Otherwise, send a POST request to the logout endpoint
             await axios.post(
                 'http://127.0.0.1:8000/api/v1/users/logout/',
                 {},
+                // Include the token in the headers
                 {
                     headers: {
                         Authorization: `Token ${token}`,
                     },
                 }
             );
+            // Remove the token from local storage
             localStorage.removeItem('token');
+            // Navigate to the logout page
             navigate('/logout');
+        // If an error occurs, log it to the console
         } catch (error) {
             console.error('Logout failed', error);
         }
     };
+
+    // Return React Bootstrap Navbar component
+    // with links to different pages
+    // and a logout button that calls the logoutUser function
     return (
         <Navbar bg="dark" variant="dark" expand="lg" style={{ backgroundColor: '#003366' }}>
       <Container>
