@@ -3,6 +3,8 @@ from user_app.models import User
 
 # Create your models here.
 class Transaction(models.Model):
+    # Creating a model for transactions
+    # Each transaction has a user, title, amount, and type (income or expense)
     TRANSACTION_CHOICES = [
         ('income', 'Income'),
         ('expense', 'Expense'),

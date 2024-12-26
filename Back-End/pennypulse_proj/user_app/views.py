@@ -11,6 +11,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
 from .models import User
 
+# TokenReq class to check if the user is authenticated
 class TokenReq(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
@@ -18,11 +19,15 @@ class TokenReq(APIView):
 # Create your views here.
 class SignUp(APIView):
     
+    # Creating a new user with the given data
     def post(self, request):
         body_data = request.data.copy()
+        # Setting the username as the email
         body_data['username'] = body_data['email']
         
+        # Creating a new user with the given data
         try:
+            # Creating a new user and a token for the user
             new_user = User.objects.create_user(**body_data)
             token = Token.objects.create(user=new_user)            
             return Response({'user' : new_user.email, 'token' : token.key})
@@ -33,13 +38,20 @@ class SignUp(APIView):
     
 class LogIn(APIView):
     
+    # Authenticating the user with the given credentials
     def post(self, request):
+        # Copying the request data and getting the email and password
         body_data = request.data.copy()
+        # Setting the username as the email
         email = body_data.get('email')
+        # Getting the password
         password = body_data.get('password')
         try:
+            # Authenticating the user with the given credentials
             user = authenticate(username=email, password=password)
+            # If the user is authenticated, log in the user and return the token
             login(request, user)
+            # Creating a token for the user
             token, created = Token.objects.get_or_create(user=user)
             return Response({'token' : token.key, 'user' : user.email})
         except Exception:
@@ -47,11 +59,15 @@ class LogIn(APIView):
 
 class LogOut(TokenReq):
     
+    # Logging out the user and deleting the token
     def post(self, request):
         try:
+            # Deleting the token and logging out the user
             request.user.auth_token.delete()
+            # Logging out the user
             logout(request)
             return Response(status=HTTP_204_NO_CONTENT)
+        # Handling exceptions and returning an error response
         except Token.DoesNotExist:
             return Response({'error': 'Token not found'}, status=HTTP_500_INTERNAL_SERVER_ERROR)
         except Exception as e:
