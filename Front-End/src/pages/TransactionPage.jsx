@@ -1,7 +1,7 @@
 import TransactionForm from "../components/TransactionForm";
 import './pages.css';
 
-const RegistrationPage = () => {
+const TransactionPage = () => {
     
     return (
         <>
@@ -11,4 +11,4 @@ const RegistrationPage = () => {
         </>
     );
 };
-export default RegistrationPage;
+export default TransactionPage;
