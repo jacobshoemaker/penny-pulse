@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import ExpenseVsBudgetChart from './ExpenseVsBudgetChart';
+import IncomeVsBudgetChart from './IncomeVsBudgetChart';
 
 const GoalsForm = () => {
     // Initialize state variable goal with object containing
@@ -153,6 +154,7 @@ const GoalsForm = () => {
     // Convert spending limit to number using Number() function.
     // This is used to pass spending limit to ExpenseVsBudgetChart component.
     const spendingLimit = goals.length > 0 ? Number(goals[0].spending_limit) : 0;
+    const savingLimit = goals.length > 0 ? Number(goals[0].saving_limit) : 0;
 
     return (
         // Display goals form and list of goals.
@@ -192,6 +194,7 @@ const GoalsForm = () => {
             {/* Expense vs Budget chart component */}
             {/* Pass transactions and spending limit as props */}
             <ExpenseVsBudgetChart transactions={transactions} spendingLimit={Number(spendingLimit)} />
+            <IncomeVsBudgetChart transactions={transactions} savingLimit={Number(savingLimit)} />
             {/* List of goals */}
             <ul>
                 {/* Map over goals array and display each goal */}
