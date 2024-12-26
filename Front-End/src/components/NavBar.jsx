@@ -47,11 +47,11 @@ const NavBar = () => {
         <Navbar bg="dark" variant="dark" expand="lg" style={{ backgroundColor: '#003366' }}>
       <Container>
         <Navbar.Brand as={Link} to="/">
-          <img src={logo} alt="Penny Pulse Logo" style={{ height: '65px', borderRadius: '10px' }} />
+          <img src={logo} alt="Penny Pulse Logo" style={{ height: '75px', borderRadius: '10px' }} />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
+          <Nav className="ml-auto">
             <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link as={Link} to="/register/">Register</Nav.Link>
             <Nav.Link as={Link} to="/login/">Login</Nav.Link>
