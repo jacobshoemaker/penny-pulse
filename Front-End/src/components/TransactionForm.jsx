@@ -142,6 +142,7 @@ const TransactionForm = () => {
                     onChange={handleChange}
                     placeholder="Transaction Title"
                     required
+                    style={{ borderRadius: '10px' }}
                 />
                 <input
                     type="number"
@@ -150,8 +151,9 @@ const TransactionForm = () => {
                     onChange={handleChange}
                     placeholder="Amount"
                     required
+                    style={{ borderRadius: '10px' }}
                 />
-                <select name="trans_type" value={transaction.trans_type} onChange={handleChange}>
+                <select name="trans_type" value={transaction.trans_type} onChange={handleChange} style={{ borderRadius: '10px' }}>
                     <option value="income">Income</option>
                     <option value="expense">Expense</option>
                 </select>

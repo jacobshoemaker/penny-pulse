@@ -31,21 +31,58 @@ const TransactionPieChart = ({ transactions }) => {
 
     return (
         //Rendering Plot component from react-plotly.js
-        <Plot
-            // Pass data and layout props to Plot component
-            data={[
-                {
-                    // Set values to totalIncome and totalExpenses
-                    values: [totalIncome, totalExpenses],
-                    // Set labels to 'Income' and 'Expenses'
-                    labels: ['Income', 'Expenses'],
-                    // Set type to 'pie' for pie chart
-                    type: 'pie'
-                }
-            ]}
-            // Set layout title to 'Income vs Expenses'
-            layout={{ title: 'Income vs Expenses' }}
-        />
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
+            <div style={{ width: '50%' }}>
+                <Plot
+                    // Pass data and layout props to Plot component
+                    data={[
+                        {
+                            // Set values to totalIncome and totalExpenses
+                            values: [totalIncome, totalExpenses],
+                            // Set labels to 'Income' and 'Expenses'
+                            labels: ['Income', 'Expenses'],
+                            // Set type to 'pie' for pie chart
+                            type: 'pie',
+                            marker: {
+                                colors: ['#1f77b4', '#ff7f0e'],
+                            },
+                            textinfo: 'label+percent',
+                            hoverinfo: 'label+percent+value',
+                            hovertemplate: '%{label}: %{percent}<br>Total: %{value:$,.2f}<extra></extra>',
+                        }
+                    ]}
+                    // Set layout title to 'Income vs Expenses'
+                    layout={{ 
+                        title: 'Income vs Expenses',
+                        paper_bgcolor: '#65bbd7',
+                        plot_bgcolor: '#65bbd7',
+                        font: {
+                            family: 'Arial, sans-serif',
+                            size: 14,
+                            color: '#131d65'
+                        },
+                        margin: {
+                            l: 20,
+                            r: 20,
+                            b: 20,
+                            t: 40,
+                        },
+                        showlegend: true,
+                        legend: {
+                            x: 1,
+                            y: 0.5,
+                            bgcolor: '#003366',
+                            bordercolor: 'black',
+                            borderwidth: 1,
+                            font: {
+                                color: "#d3d6eb"
+                            },
+                        },
+                    }}
+                    style = {{ width: '100%', height: '100%' }}
+                />
+            </div>
+        </div>
     );
 };
 
