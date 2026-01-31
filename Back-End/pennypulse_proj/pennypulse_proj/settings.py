@@ -10,15 +10,18 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+# Standard path handling
 from pathlib import Path
 from dotenv import dotenv_values
 
-env = dotenv_values(".env")
-print(env.keys())
-print(env.get("DJANGO_SECRET_KEY"))
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+# Define BASE_DIR first so we can construct the full .env path reliably.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Load environment variables from the project's .env file
+env_path = BASE_DIR / ".env"
+env = dotenv_values(env_path)
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -88,10 +91,15 @@ WSGI_APPLICATION = 'pennypulse_proj.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'penny_db',
+        'NAME': env.get('DB_NAME', 'penny_db'),
+        'USER': env.get('DB_USER', 'postgres'),
+        'PASSWORD': env.get('DB_PASSWORD'),
+        'HOST': env.get('DB_HOST', 'localhost'),
+        'PORT': env.get('DB_PORT', '5432'),
     }
 }
 
